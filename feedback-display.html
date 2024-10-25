@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Feedback Display</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                padding: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+            #feedback-display {
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                margin: 20px auto;
+                padding: 20px;
+                width: 80%;
+                max-width: 600px;
+                text-align: left;
+            }
+
+            .feedback-item {
+                border-bottom: 1px solid #eee;
+                padding: 10px 0;
+            }
+
+            .feedback-item:last-child {
+                border-bottom: none;
+            }
+
+            .thank-you-message {
+                margin-top: 20px;
+                font-size: 18px;
+                color: #27ae60;
+                text-align: center;
+                font-weight: bold;
+            }
+
+
+            @media (max-width: 600px) {
+                #feedback-display {
+                    width: 90%;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Feedback Display</h1>
+        <div id="feedback-display"></div>
+        <div class="thank-you-message">Thank you for your feedback!</div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const feedbackDisplay = document.getElementById("feedback-display");
+                const name = localStorage.getItem("feedbackName");
+                const message = localStorage.getItem("feedbackMessage");
+
+                if (feedbackDisplay) {
+                    if (name && message) {
+                        feedbackDisplay.innerHTML = `
+                        <div class="feedback-item">
+                            <strong>Name:</strong> ${name}<br>
+                            <strong>Message:</strong> ${message}
+                        </div>`;
+                    } else {
+                        feedbackDisplay.innerHTML = '<p>No feedback available.</p>';
+                    }
+                }
+
+
+                localStorage.removeItem("feedbackName");
+                localStorage.removeItem("feedbackMessage");
+            });
+        </script>
+    </body>
+
+</html>
